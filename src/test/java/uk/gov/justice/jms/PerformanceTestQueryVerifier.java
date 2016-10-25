@@ -17,13 +17,15 @@ public class PerformanceTestQueryVerifier {
 
     private ExternalProperties props = new ExternalProperties();
 
-
     @Test
-    public void shouldHaveTotalTimeLessThanEqualTo5SecondsForQueries() throws Exception {
-        assertThat(wildflyTimeForQueries(), lessThanOrEqualTo(props.getExpectedTimeTakenByQueries()));
+    public void shouldHaveTotalTimeLessThanEqualToExpectedTime() throws Exception {
+        for (String contextName : props.getContextNames()) {
+            assertThat(wildflyTimeForQueries(contextName), lessThanOrEqualTo(props.getExpectedTimeTakenByQueries()));
+        }
     }
 
-    private double wildflyTimeForQueries() throws J4pException, MalformedObjectNameException {
-        return timeTakenByRestQueryApi(props) + timeTakenByRestQueryController(props) + timeTakenByRestQueryView(props);
+    private double wildflyTimeForQueries(String contextName) throws J4pException, MalformedObjectNameException {
+        return timeTakenByRestQueryApi(props, contextName) + timeTakenByRestQueryController(props, contextName)
+                + timeTakenByRestQueryView(props, contextName);
     }
 }

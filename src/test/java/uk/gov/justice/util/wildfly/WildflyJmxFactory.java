@@ -116,7 +116,7 @@ public class WildflyJmxFactory {
             try {
                 J4pReadRequest req = new J4pReadRequest(name);
                 J4pReadResponse resp = props.getWildflyJ4PClient().execute(req);
-                totalTime = totalTime + (double) resp.getValue(MEAN);
+                totalTime = totalTime + (Double) resp.getValue(MEAN);
             } catch (Exception ex) {
                 LOGGER.error("mBean not found {}.", name);
                 return ZERO;

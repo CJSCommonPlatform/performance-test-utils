@@ -10,7 +10,7 @@ import javax.management.MalformedObjectNameException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static uk.gov.justice.util.artemis.ArtemisJmxFactory.timeMessageStaysInCommandQueue;
-import static uk.gov.justice.util.artemis.ArtemisJmxFactory.timeMessageStaysInEventListenerQueue;
+import static uk.gov.justice.util.artemis.ArtemisJmxFactory.timeMessageStaysInEventListenerTopic;
 import static uk.gov.justice.util.artemis.ArtemisJmxFactory.timeMessageStaysInHandlerQueue;
 import static uk.gov.justice.util.wildfly.WildflyJmxFactory.timeTakenByCommandController;
 import static uk.gov.justice.util.wildfly.WildflyJmxFactory.timeTakenByCommandHandler;
@@ -30,7 +30,7 @@ public class PerformanceTestCommandVerifier {
 
     private double artemisTimeForCommands(String contextName) throws J4pException, MalformedObjectNameException {
         return timeMessageStaysInCommandQueue(props, contextName) + timeMessageStaysInHandlerQueue(props, contextName)
-                + timeMessageStaysInEventListenerQueue(props, contextName);
+                + timeMessageStaysInEventListenerTopic(props, contextName);
     }
 
     private double wildflyTimeForCommands(String contextName) throws J4pException, MalformedObjectNameException {

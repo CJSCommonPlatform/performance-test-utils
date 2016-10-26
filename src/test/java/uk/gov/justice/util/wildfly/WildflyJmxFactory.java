@@ -18,7 +18,7 @@ import static uk.gov.justice.util.JmxAttributesConstants.MEAN;
 public class WildflyJmxFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(WildflyJmxFactory.class);
-    public static final double ZERO = 0.0;
+    private static final double ZERO = 0.0;
 
     public static double timeTakenByCommandController(ExternalProperties props, String contextName)
             throws J4pException, MalformedObjectNameException {

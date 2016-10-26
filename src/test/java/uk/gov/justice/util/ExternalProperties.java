@@ -11,13 +11,13 @@ import static org.junit.Assert.fail;
 public class ExternalProperties {
 
     private static final String PROPERTY_FILE_NAME = "application.properties";
-    public static final String WILDFLY_JOLOKIA_FULL_PATH = "wildfly.jolokia.full.path";
-    public static final String ARTEMIS_JOLOKIA_FULL_PATH = "artemis.jolokia.full.path";
-    public static final String METRICS_NAME = "metrics.name";
-    public static final String CONTEXT_NAME = "context.name";
-    public static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
-    public static final String QUERY_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
-    public static final String SPLITTER = ",";
+    private static final String WILDFLY_JOLOKIA_FULL_PATH = "wildfly.jolokia.full.path";
+    private static final String ARTEMIS_JOLOKIA_FULL_PATH = "artemis.jolokia.full.path";
+    private static final String METRICS_NAME = "metrics.name";
+    private static final String CONTEXT_NAME = "context.name";
+    private static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
+    private static final String QUERY_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
+    private static final String SPLITTER = ",";
     private java.util.Properties properties = new java.util.Properties();
 
     public ExternalProperties() {

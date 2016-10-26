@@ -15,7 +15,7 @@ import static uk.gov.justice.util.JmxAttributesConstants.MEAN;
 public class ArtemisJmxFactory {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ArtemisJmxFactory.class);
-    public static final double ZERO = 0.0;
+    private static final double ZERO = 0.0;
 
     public static double timeMessageStaysInCommandQueue(ExternalProperties props, String contextName)
             throws J4pException, MalformedObjectNameException {
@@ -35,7 +35,7 @@ public class ArtemisJmxFactory {
         return getJmxAttributeValue(props, mBeanName);
     }
 
-    public static double timeMessageStaysInEventListenerQueue(ExternalProperties props, String contextName)
+    public static double timeMessageStaysInEventListenerTopic(ExternalProperties props, String contextName)
             throws J4pException, MalformedObjectNameException {
         String mBeanName = new StringBuilder().append(props.getMetricsName())
                 .append(":name=jms.topic.")

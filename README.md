@@ -10,9 +10,9 @@ The utility reads the values and assert them against user defined values
 
 **Usage:**
 
-_mvn clean install_ 
-
 The utility is tested on vagrant box with jolokia. The jolokia ports for vagrant are:
 
 Artemis: 8161
 Wildfly: 9080
+
+The integration tests show how to use the utility.

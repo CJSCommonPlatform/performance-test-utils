@@ -14,7 +14,6 @@ import javax.management.MalformedObjectNameException;
 import java.util.List;
 
 public class JolokiaArtemisClient {
-
     private static JolokiaArtemisClient instance;
     private static final Logger LOGGER = LoggerFactory.getLogger(JolokiaArtemisClient.class);
     private static final String ARTEMIS_JOLOKIA_FULL_PATH = "artemis.jolokia.full.path";
@@ -44,6 +43,4 @@ public class JolokiaArtemisClient {
             return ZERO;
         }
     }
-
-
 }

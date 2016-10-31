@@ -14,7 +14,6 @@ import javax.management.MalformedObjectNameException;
 import java.util.List;
 
 public class JolokiaWildflyClient {
-
     private static JolokiaWildflyClient instance;
     private static final Logger LOGGER = LoggerFactory.getLogger(JolokiaWildflyClient.class);
     private static final String WILDFLY_JOLOKIA_FULL_PATH = "wildfly.jolokia.full.path";

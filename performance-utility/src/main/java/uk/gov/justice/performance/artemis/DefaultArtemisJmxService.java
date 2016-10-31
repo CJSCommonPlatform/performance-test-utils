@@ -8,11 +8,9 @@ import uk.gov.justice.performance.utils.JolokiaArtemisClient;
 import javax.management.MalformedObjectNameException;
 
 public class DefaultArtemisJmxService implements ArtemisJmxService {
-
     private static final String METRICS_NAME = "metrics.name";
     private ExternalProperties props = ExternalProperties.getInstance();
     private JolokiaArtemisClient jolokiaArtemisClient = JolokiaArtemisClient.getInstance();
-
 
     public double timeMessageStaysInCommandQueue(String contextName, String timeType)
             throws J4pException, MalformedObjectNameException {
@@ -44,5 +42,4 @@ public class DefaultArtemisJmxService implements ArtemisJmxService {
                 .append("\\.event").toString();
         return jolokiaArtemisClient.getJmxAttributeValue(mBeanName, timeType);
     }
-
 }

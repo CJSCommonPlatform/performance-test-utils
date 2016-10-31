@@ -9,9 +9,7 @@ import javax.management.MalformedObjectNameException;
 
 public class DefaultWildflyJmxService implements WildflyJmxService {
     private static final String METRICS_NAME = "metrics.name";
-
     private ExternalProperties props = ExternalProperties.getInstance();
-
     private JolokiaWildflyClient jolokiaWildflyClient = JolokiaWildflyClient.getInstance();
 
 

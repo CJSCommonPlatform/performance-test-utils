@@ -28,7 +28,7 @@ public class ExternalProperties {
     }
 
     /**
-     * Singleton method
+     * Singleton
      *
      * @return instance of the class
      */

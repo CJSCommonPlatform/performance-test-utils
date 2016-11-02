@@ -36,7 +36,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
         return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
     }
 
-    public double timeTakenByEventListenerAndProcessor(String contextName, String timeType)
+    public double timeTakenByEventListener(String contextName, String timeType)
             throws J4pException, MalformedObjectNameException {
         String searchStr = new StringBuilder().append(props.value(METRICS_NAME))
                 .append(":name=wildfly.jms.topic.")
@@ -59,7 +59,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
         return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
     }
 
-    public double timeTakenByRestQueryApi(String contextName, String timeType)
+    public double totalWildflyTimeForQueries(String contextName, String timeType)
             throws J4pException, MalformedObjectNameException {
         String searchStr = new StringBuilder().append(props.value(METRICS_NAME))
                 .append(":name=wildfly.rest.")
@@ -71,39 +71,9 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
         return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
     }
 
-    public double timeTakenByRestQueryController(String contextName, String timeType)
-            throws J4pException, MalformedObjectNameException {
-        String searchStr = new StringBuilder().append(props.value(METRICS_NAME))
-                .append(":name=wildfly.rest.")
-                .append(contextName)
-                .append("-query-controller/")
-                .append(contextName)
-                .append("/")
-                .append("*").toString();
-        return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
-    }
-
-    public double timeTakenByRestQueryView(String contextName, String timeType)
-            throws J4pException, MalformedObjectNameException {
-        String searchStr = new StringBuilder().append(props.value(METRICS_NAME))
-                .append(":name=wildfly.rest.")
-                .append(contextName)
-                .append("-query-view/")
-                .append(contextName)
-                .append("/")
-                .append("*").toString();
-        return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
-    }
-
-    public double totalWildflyTimeForQueries(String contextName, String timeType) throws J4pException, MalformedObjectNameException {
-        return timeTakenByRestQueryApi(contextName, timeType) + timeTakenByRestQueryController(contextName, timeType)
-                + timeTakenByRestQueryView(contextName, timeType);
-    }
-
-
     public double totalWildflyTimeForCommands(String contextName, String timeType) throws J4pException, MalformedObjectNameException {
         return timeTakenByRestCommandApi(contextName, timeType) + timeTakenByCommandController(contextName, timeType)
-                + timeTakenByCommandHandler(contextName, timeType) + timeTakenByEventListenerAndProcessor(contextName, timeType);
+                + timeTakenByCommandHandler(contextName, timeType) + timeTakenByEventListener(contextName, timeType);
     }
 }
 

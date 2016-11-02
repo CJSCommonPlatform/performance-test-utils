@@ -27,7 +27,7 @@ public class PerformanceTestCommandVerifier {
 
             double timeForWildfly = wildflyJmxService.timeTakenByCommandController(contextName, MEAN)
                     + wildflyJmxService.timeTakenByCommandHandler(contextName, MEAN)
-                    + wildflyJmxService.timeTakenByEventListenerAndProcessor(contextName, MEAN);
+                    + wildflyJmxService.timeTakenByEventListener(contextName, MEAN);
 
             assertThat(timeInQueues + timeForWildfly, lessThanOrEqualTo(5000.0));
         }

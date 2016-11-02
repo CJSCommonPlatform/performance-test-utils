@@ -11,15 +11,9 @@ public interface WildflyJmxService {
 
     double timeTakenByCommandHandler(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
 
-    double timeTakenByEventListenerAndProcessor(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
+    double timeTakenByEventListener(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
 
     double timeTakenByRestCommandApi(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
-
-    double timeTakenByRestQueryApi(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
-
-    double timeTakenByRestQueryController(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
-
-    double timeTakenByRestQueryView(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
 
     double totalWildflyTimeForQueries(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
 

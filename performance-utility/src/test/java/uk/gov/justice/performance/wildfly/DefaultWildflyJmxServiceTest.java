@@ -51,7 +51,7 @@ public class DefaultWildflyJmxServiceTest {
     public void shouldReturnTimeTakenByEventListenerAndProcessor() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(jolokiaWildflyClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.timeTakenByEventListenerAndProcessor("people", "Mean"), lessThanOrEqualTo(1.0));
+        assertThat(defaultWildflyJmxService.timeTakenByEventListener("people", "Mean"), lessThanOrEqualTo(1.0));
     }
 
     @Test
@@ -65,21 +65,7 @@ public class DefaultWildflyJmxServiceTest {
     public void shouldReturnTimeTakenByRestQueryApi() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(jolokiaWildflyClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.timeTakenByRestQueryApi("people", "Mean"), lessThanOrEqualTo(1.0));
-    }
-
-    @Test
-    public void shouldReturnTimeTakenByRestQueryController() throws MalformedObjectNameException, J4pException {
-        when(props.value(anyString())).thenReturn("abc");
-        when(jolokiaWildflyClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.timeTakenByRestQueryController("people", "Mean"), lessThanOrEqualTo(1.0));
-    }
-
-    @Test
-    public void shouldReturnTimeTakenByRestQueryView() throws MalformedObjectNameException, J4pException {
-        when(props.value(anyString())).thenReturn("abc");
-        when(jolokiaWildflyClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.timeTakenByRestQueryView("people", "Mean"), lessThanOrEqualTo(1.0));
+        assertThat(defaultWildflyJmxService.totalWildflyTimeForQueries("people", "Mean"), lessThanOrEqualTo(1.0));
     }
 
     @Test

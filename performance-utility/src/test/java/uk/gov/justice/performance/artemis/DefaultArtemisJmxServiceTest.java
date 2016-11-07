@@ -52,4 +52,11 @@ public class DefaultArtemisJmxServiceTest {
         when(jolokiaArtemisClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
         assertThat(defaultArtemisJmxService.timeMessageStaysInEventListenerTopic(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
     }
+
+    @Test
+    public void shouldReturnTotalTimeMessageStaysInQueuesAndTopic() throws MalformedObjectNameException, J4pException {
+        when(props.value(anyString())).thenReturn("abc");
+        when(jolokiaArtemisClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
+        assertThat(defaultArtemisJmxService.totalTimeMessageStaysInQueuesAndTopic(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(3.0));
+    }
 }

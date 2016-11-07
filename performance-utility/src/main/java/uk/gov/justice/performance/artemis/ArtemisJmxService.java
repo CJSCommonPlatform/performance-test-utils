@@ -12,4 +12,6 @@ public interface ArtemisJmxService {
     double timeMessageStaysInHandlerQueue(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
 
     double timeMessageStaysInEventListenerTopic(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
+
+    double totalTimeMessageStaysInQueuesAndTopic(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
 }

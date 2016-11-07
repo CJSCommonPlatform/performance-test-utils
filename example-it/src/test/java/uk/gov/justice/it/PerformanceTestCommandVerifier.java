@@ -4,32 +4,33 @@ package uk.gov.justice.it;
 import org.junit.Test;
 import uk.gov.justice.performance.artemis.ArtemisJmxService;
 import uk.gov.justice.performance.artemis.DefaultArtemisJmxService;
+import uk.gov.justice.performance.utils.ExternalProperties;
 import uk.gov.justice.performance.wildfly.DefaultWildflyJmxService;
 import uk.gov.justice.performance.wildfly.WildflyJmxService;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static uk.gov.justice.utils.JmxAttributesConstant.MEAN;
+import static uk.gov.justice.performance.utils.JmxAttributesConstant.MEAN;
 
 public class PerformanceTestCommandVerifier {
-
+    private static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
+    private static final String CONTEXT_NAMES = "context.names";
+    private static final String SPLITTER = ",";
     private ArtemisJmxService artemisJmxService = new DefaultArtemisJmxService();
     private WildflyJmxService wildflyJmxService = new DefaultWildflyJmxService();
+    private ExternalProperties externalProperties = ExternalProperties.getInstance();
 
     @Test
     public void shouldHaveTotalMeanTimeLessThanEqualToExpectedTime() throws Exception {
-        String[] names = new String[]{"people", "usersgroups"};
+        String[] names = externalProperties.value(CONTEXT_NAMES).split(SPLITTER);
 
         for (String contextName : names) {
-            double timeInQueues = artemisJmxService.timeMessageStaysInCommandQueue(contextName, MEAN)
-                    + artemisJmxService.timeMessageStaysInHandlerQueue(contextName, MEAN)
-                    + artemisJmxService.timeMessageStaysInEventListenerTopic(contextName, MEAN);
+            
+            double timeInQueues = artemisJmxService.totalTimeMessageStaysInQueuesAndTopic(contextName, MEAN);
+            double timeForWildfly = wildflyJmxService.totalWildflyTimeForCommands(contextName, MEAN);
 
-            double timeForWildfly = wildflyJmxService.timeTakenByCommandController(contextName, MEAN)
-                    + wildflyJmxService.timeTakenByCommandHandler(contextName, MEAN)
-                    + wildflyJmxService.timeTakenByEventListener(contextName, MEAN);
-
-            assertThat(timeInQueues + timeForWildfly, lessThanOrEqualTo(5000.0));
+            assertThat(timeInQueues + timeForWildfly,
+                    lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
         }
     }
 }

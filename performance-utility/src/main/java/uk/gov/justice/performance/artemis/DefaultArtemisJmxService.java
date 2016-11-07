@@ -42,4 +42,10 @@ public class DefaultArtemisJmxService implements ArtemisJmxService {
                 .append("\\.event").toString();
         return jolokiaArtemisClient.getJmxAttributeValue(mBeanName, timeType);
     }
+
+    public double totalTimeMessageStaysInQueuesAndTopic(String contextName, String timeType) throws J4pException, MalformedObjectNameException {
+        return timeMessageStaysInCommandQueue(contextName, timeType)
+                + timeMessageStaysInHandlerQueue(contextName, timeType)
+                + timeMessageStaysInEventListenerTopic(contextName, timeType);
+    }
 }

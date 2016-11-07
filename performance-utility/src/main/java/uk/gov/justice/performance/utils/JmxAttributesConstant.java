@@ -1,4 +1,4 @@
-package uk.gov.justice.utils;
+package uk.gov.justice.performance.utils;
 
 
 public class JmxAttributesConstant {

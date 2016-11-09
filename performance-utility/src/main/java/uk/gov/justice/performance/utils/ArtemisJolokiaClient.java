@@ -10,11 +10,12 @@ import org.slf4j.LoggerFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JolokiaArtemisClient {
-    private static JolokiaArtemisClient instance;
-    private static final Logger LOGGER = LoggerFactory.getLogger(JolokiaArtemisClient.class);
+import static uk.gov.justice.performance.utils.CommonConstant.DEV_PROXY_FULL_PATHS;
+
+public class ArtemisJolokiaClient {
+    private static ArtemisJolokiaClient instance;
+    private static final Logger LOGGER = LoggerFactory.getLogger(ArtemisJolokiaClient.class);
     private static final String ARTEMIS_JOLOKIA_FULL_PATHS = "artemis.jolokia.full.path";
-    private static final String DEV_PROXY_FULL_PATHS = "dev.proxy.full.path";
     private static ExternalProperties props = ExternalProperties.getInstance();
     private static List<J4pClient> j4pClients;
     private static final double ZERO = 0.0;
@@ -24,10 +25,10 @@ public class JolokiaArtemisClient {
      *
      * @return instance of the class
      */
-    public static JolokiaArtemisClient getInstance() {
+    public static ArtemisJolokiaClient getInstance() {
         if (instance == null) {
             initialiseClients();
-            instance = new JolokiaArtemisClient();
+            instance = new ArtemisJolokiaClient();
         }
         return instance;
     }

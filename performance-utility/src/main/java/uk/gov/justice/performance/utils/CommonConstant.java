@@ -1,7 +1,7 @@
 package uk.gov.justice.performance.utils;
 
 
-public class JmxAttributesConstant {
+public class CommonConstant {
     public static final String MEAN = "Mean";
     public static final String MEAN_RATE = "MeanRate";
     public static final String FIFTIETH_PERCENTILE = "50thPercentile";

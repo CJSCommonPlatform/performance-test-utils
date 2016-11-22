@@ -16,8 +16,9 @@ Artemis: 8161
 Wildfly: 9080
 
 There are two instances of Artemis on DEV. The URLs are:
-http://***REMOVED***:8161/jolokia
 
+http://***REMOVED***:8161/jolokia
+and
 http://***REMOVED***:8161/jolokia
 
 The utility connects to DEV via Proxy which is:

@@ -3,14 +3,15 @@ package uk.gov.justice.performance.wildfly;
 
 import org.jolokia.client.exception.J4pException;
 import uk.gov.justice.performance.utils.ExternalProperties;
-import uk.gov.justice.performance.utils.JolokiaWildflyClient;
+import uk.gov.justice.performance.utils.WildflyJolokiaClient;
 
 import javax.management.MalformedObjectNameException;
 
+import static uk.gov.justice.performance.utils.CommonConstant.METRICS_NAME;
+
 public class DefaultWildflyJmxService implements WildflyJmxService {
-    private static final String METRICS_NAME = "metrics.name";
     private ExternalProperties props = ExternalProperties.getInstance();
-    private JolokiaWildflyClient jolokiaWildflyClient = JolokiaWildflyClient.getInstance();
+    private WildflyJolokiaClient wildflyJolokiaClient = WildflyJolokiaClient.getInstance();
 
 
     public double timeTakenByCommandController(String contextName, String timeType)
@@ -22,7 +23,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(contextName)
                 .append("*").toString();
 
-        return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
+        return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
     public double timeTakenByCommandHandler(String contextName, String timeType)
@@ -33,7 +34,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(".handler.command-")
                 .append(contextName)
                 .append("*").toString();
-        return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
+        return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
     public double timeTakenByEventListener(String contextName, String timeType)
@@ -44,7 +45,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(".event-")
                 .append(contextName)
                 .append("*").toString();
-        return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
+        return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
     public double timeTakenByRestCommandApi(String contextName, String timeType)
@@ -56,7 +57,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(contextName)
                 .append("/")
                 .append("*").toString();
-        return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
+        return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
     public double totalWildflyTimeForQueries(String contextName, String timeType)
@@ -68,7 +69,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(contextName)
                 .append("/")
                 .append("*").toString();
-        return jolokiaWildflyClient.getJmxAttributeValue(searchStr, timeType);
+        return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
     public double totalWildflyTimeForCommands(String contextName, String timeType) throws J4pException, MalformedObjectNameException {

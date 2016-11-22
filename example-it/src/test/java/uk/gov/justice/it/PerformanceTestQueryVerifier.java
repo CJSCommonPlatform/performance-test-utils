@@ -8,13 +8,27 @@ import uk.gov.justice.performance.wildfly.WildflyJmxService;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
-import static uk.gov.justice.performance.utils.JmxAttributesConstant.*;
+import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
+import static uk.gov.justice.performance.utils.CommonConstant.COUNT;
+import static uk.gov.justice.performance.utils.CommonConstant.FIFTEEN_MINUTE_RATE;
+import static uk.gov.justice.performance.utils.CommonConstant.FIFTIETH_PERCENTILE;
+import static uk.gov.justice.performance.utils.CommonConstant.FIVE_MINUTE_RATE;
+import static uk.gov.justice.performance.utils.CommonConstant.MAX;
+import static uk.gov.justice.performance.utils.CommonConstant.MEAN;
+import static uk.gov.justice.performance.utils.CommonConstant.MEAN_RATE;
+import static uk.gov.justice.performance.utils.CommonConstant.MIN;
+import static uk.gov.justice.performance.utils.CommonConstant.NINETY_EIGHTH_PERCENTILE;
+import static uk.gov.justice.performance.utils.CommonConstant.NINETY_FIFTH_PERCENTILE;
+import static uk.gov.justice.performance.utils.CommonConstant.NINETY_NINTH_PERCENTILE;
+import static uk.gov.justice.performance.utils.CommonConstant.NINE_HUNDRED_NINETY_NINTH_PERCENTILE;
+import static uk.gov.justice.performance.utils.CommonConstant.ONE_MINUTE_RATE;
+import static uk.gov.justice.performance.utils.CommonConstant.SEVENTY_FIFTH_PERCENTILE;
+import static uk.gov.justice.performance.utils.CommonConstant.STANDARD_DEVIATION;
 
 public class PerformanceTestQueryVerifier {
 
     private static final String COMMAND_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
     private static final String CONTEXT_NAMES = "context.names";
-    private static final String SPLITTER = ",";
     public static final String PEOPLE_CONTEXT = "people";
     private WildflyJmxService wildflyJmxService = new DefaultWildflyJmxService();
     private ExternalProperties externalProperties = ExternalProperties.getInstance();
@@ -22,7 +36,7 @@ public class PerformanceTestQueryVerifier {
     //test for multiple contexts
     @Test
     public void shouldHaveTotalMeanTimeLessThanEqualToExpectedMeanTime() throws Exception {
-        String[] names = externalProperties.value(CONTEXT_NAMES).split(SPLITTER);
+        String[] names = externalProperties.value(CONTEXT_NAMES).split(COMMA);
         for (String contextName : names)
             assertThat(wildflyJmxService.totalWildflyTimeForQueries(contextName, MEAN),
                     lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));

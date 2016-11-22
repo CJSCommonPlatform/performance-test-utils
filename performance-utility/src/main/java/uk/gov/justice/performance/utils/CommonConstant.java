@@ -2,6 +2,7 @@ package uk.gov.justice.performance.utils;
 
 
 public class CommonConstant {
+    public static final String METRICS_NAME = "metrics.name";
     public static final String MEAN = "Mean";
     public static final String MEAN_RATE = "MeanRate";
     public static final String FIFTIETH_PERCENTILE = "50thPercentile";
@@ -17,4 +18,11 @@ public class CommonConstant {
     public static final String MIN = "Min";
     public static final String COUNT = "Count";
     public static final String STANDARD_DEVIATION = "StdDev";
+    static final String DEV_PROXY_FULL_PATH = "dev.proxy.full.path";
+    public static final String COMMA = ",";
+    static final double ZERO = 0.0;
+
+    private CommonConstant() {
+        throw new IllegalAccessError("Utility class");
+    }
 }

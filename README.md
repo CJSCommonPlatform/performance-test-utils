@@ -15,13 +15,4 @@ The utility is tested on local vagrant box with jolokia. The jolokia ports for v
 Artemis: 8161
 Wildfly: 9080
 
-There are two instances of Artemis on DEV. The URLs are:
-
-http://***REMOVED***:8161/jolokia
-and
-http://***REMOVED***:8161/jolokia
-
-The utility connects to DEV via Proxy which is:
-http://***REMOVED***:3128
-
 The utility returns the average values of all the instances. The integration tests show how to use the utility.

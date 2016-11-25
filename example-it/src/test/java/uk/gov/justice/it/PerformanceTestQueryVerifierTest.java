@@ -25,7 +25,7 @@ import static uk.gov.justice.performance.utils.CommonConstant.ONE_MINUTE_RATE;
 import static uk.gov.justice.performance.utils.CommonConstant.SEVENTY_FIFTH_PERCENTILE;
 import static uk.gov.justice.performance.utils.CommonConstant.STANDARD_DEVIATION;
 
-public class PerformanceTestQueryVerifier {
+public class PerformanceTestQueryVerifierTest {
 
     private static final String COMMAND_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
     private static final String CONTEXT_NAMES = "context.names";

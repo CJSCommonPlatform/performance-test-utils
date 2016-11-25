@@ -13,7 +13,7 @@ import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
 import static uk.gov.justice.performance.utils.CommonConstant.MEAN;
 
-public class PerformanceTestCommandVerifier {
+public class PerformanceTestCommandVerifierTest {
     private static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
     private static final String CONTEXT_NAMES = "context.names";
     private ArtemisJmxService artemisJmxService = new DefaultArtemisJmxService();

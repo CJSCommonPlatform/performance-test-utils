@@ -16,3 +16,9 @@ Artemis: 8161
 Wildfly: 9080
 
 The utility returns the average values of all the instances. The integration tests show how to use the utility.
+
+Artemis, Wildfly and Proxy URLS are externalised so these should be passed as part of maven command e.g.
+
+`mvn clean install -DartemisUrl=http://ip1:port/jolokia,http://ip2:port/jolokia -DwildflyUrl=http://ip1:port/jolokia,http://ip2:port/jolokia -DproxyUrl=http://ip:port`
+
+Proxy is optional.

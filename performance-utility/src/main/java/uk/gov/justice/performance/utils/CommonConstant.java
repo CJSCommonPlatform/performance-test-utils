@@ -18,9 +18,13 @@ public class CommonConstant {
     public static final String MIN = "Min";
     public static final String COUNT = "Count";
     public static final String STANDARD_DEVIATION = "StdDev";
-    static final String DEV_PROXY_FULL_PATH = "dev.proxy.full.path";
+    public static final String DEV_PROXY_FULL_PATH = "dev.proxy.full.path";
     public static final String COMMA = ",";
-    static final double ZERO = 0.0;
+    public static final String PROPERTY_FILE_NAME = "application.properties";
+    public static final String CONTEXT_NAMES = "context.names";
+    public static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
+    public static final String QUERY_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
+    public static final double ZERO = 0.0;
 
     private CommonConstant() {
         throw new IllegalAccessError("Utility class");

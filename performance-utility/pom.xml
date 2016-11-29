@@ -16,9 +16,12 @@
         <profile>
             <id>default</id>
             <properties>
-                <artemisUrl>localhost:8161/jolokia</artemisUrl>
-                <wildflyUrl>localhost:8080/jolokia</wildflyUrl>
-                <proxyUrl>localhost:3128/jolokia</proxyUrl>
+                <artemisUrl></artemisUrl>
+                <wildflyUrl></wildflyUrl>
+                <proxyUrl></proxyUrl>
+                <contextList></contextList>
+                <queryTime></queryTime>
+                <commandTime></commandTime>
             </properties>
         </profile>
     </profiles>

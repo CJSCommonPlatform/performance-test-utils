@@ -1,14 +1,18 @@
 package uk.gov.justice.performance.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
 import static org.junit.Assert.fail;
+import static uk.gov.justice.performance.utils.CommonConstant.*;
 
 public class ExternalProperties {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ExternalProperties.class);
 
-    private static final String PROPERTY_FILE_NAME = "application.properties";
 
     private static ExternalProperties instance;
     private final Properties properties = new Properties();
@@ -19,6 +23,8 @@ public class ExternalProperties {
         if (is != null) {
             try {
                 properties.load(is);
+                LOGGER.info("Contexts: {}, Command time expected: {}, Query time expected: {}", properties.getProperty(CONTEXT_NAMES),
+                        properties.getProperty(COMMAND_EXPECTED_TIME_TAKEN), properties.getProperty(QUERY_EXPECTED_TIME_TAKEN));
             } catch (IOException e) {
                 fail("error reading " + PROPERTY_FILE_NAME);
             }

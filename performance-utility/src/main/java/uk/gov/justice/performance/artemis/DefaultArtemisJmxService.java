@@ -1,7 +1,9 @@
 package uk.gov.justice.performance.artemis;
 
 
+import static uk.gov.justice.performance.utils.CommonConstant.ARTEMIS_JOLOKIA_URL_LIST;
 import static uk.gov.justice.performance.utils.CommonConstant.METRICS_NAME;
+import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
 
 import java.util.Properties;
 
@@ -15,13 +17,18 @@ import uk.gov.justice.performance.utils.ExternalProperties;
 public class DefaultArtemisJmxService implements ArtemisJmxService {
 
     private Properties props;
-    private ArtemisJolokiaClient artemisJolokiaClient = ArtemisJolokiaClient.getInstance();
+    private ArtemisJolokiaClient artemisJolokiaClient;
 
     public DefaultArtemisJmxService() {
         this.props = ExternalProperties.getInstance().getProperties();
-        this.artemisJolokiaClient = ArtemisJolokiaClient.getInstance();
+        this.artemisJolokiaClient = new ArtemisJolokiaClient(this.props.getProperty(ARTEMIS_JOLOKIA_URL_LIST),this.props.getProperty(PROXY_URL));
     }
 
+    public DefaultArtemisJmxService(Properties props) {
+        this.props = props;
+        this.artemisJolokiaClient = new ArtemisJolokiaClient(this.props.getProperty(ARTEMIS_JOLOKIA_URL_LIST),this.props.getProperty(PROXY_URL));
+    }
+    
     public DefaultArtemisJmxService(Properties props, ArtemisJolokiaClient artemisJolokiaClient) {
         this.props = props;
         this.artemisJolokiaClient = artemisJolokiaClient;

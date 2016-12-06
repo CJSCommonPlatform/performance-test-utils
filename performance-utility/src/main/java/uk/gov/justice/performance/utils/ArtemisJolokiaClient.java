@@ -2,7 +2,6 @@ package uk.gov.justice.performance.utils;
 
 
 import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
-import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
 import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
 
 import java.util.ArrayList;
@@ -15,23 +14,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class ArtemisJolokiaClient {
-    private static ArtemisJolokiaClient instance;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ArtemisJolokiaClient.class);
-    private static final String ARTEMIS_JOLOKIA_URL_LIST = "artemis.jolokia.url.list";
-    private static ExternalProperties props = ExternalProperties.getInstance();
-    private static List<J4pClient> j4pClients;
+    
+    private Logger LOGGER = LoggerFactory.getLogger(ArtemisJolokiaClient.class);
+    private List<J4pClient> j4pClients;
 
     /**
      * Singleton
      *
      * @return instance of the class
      */
-    public static ArtemisJolokiaClient getInstance() {
-        if (instance == null) {
-            initialiseClients();
-            instance = new ArtemisJolokiaClient();
-        }
-        return instance;
+    public ArtemisJolokiaClient(String clients, String proxy) {
+        initialiseClients(clients, proxy);
     }
 
     /**
@@ -58,10 +51,10 @@ public class ArtemisJolokiaClient {
     /*
     *This method creates multiple clients for all the Artemis nodes.
     * */
-    private static void initialiseClients() {
+    private void initialiseClients(String clients, String proxy) {
         j4pClients = new ArrayList<J4pClient>();
-        for (String url : props.value(ARTEMIS_JOLOKIA_URL_LIST).split(COMMA)) {
-            j4pClients.add(J4pClient.url(url).proxy(props.value(PROXY_URL)).build());
+        for (String url : clients.split(COMMA)) {
+            j4pClients.add(J4pClient.url(url).proxy(proxy).build());
         }
     }
 }

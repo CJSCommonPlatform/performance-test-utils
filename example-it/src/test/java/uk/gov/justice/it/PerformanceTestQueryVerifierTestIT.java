@@ -27,7 +27,7 @@ import static uk.gov.justice.performance.utils.CommonConstant.STANDARD_DEVIATION
 
 public class PerformanceTestQueryVerifierTestIT {
 
-    private static final String COMMAND_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
+    private static final String QUERY_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
     private static final String CONTEXT_NAMES = "context.names";
     public static final String PEOPLE_CONTEXT = "people";
     private WildflyJmxService wildflyJmxService = new DefaultWildflyJmxService();
@@ -39,90 +39,90 @@ public class PerformanceTestQueryVerifierTestIT {
         String[] names = externalProperties.value(CONTEXT_NAMES).split(COMMA);
         for (String contextName : names)
             assertThat(wildflyJmxService.totalWildflyTimeForQueries(contextName, MEAN),
-                    lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                    lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalMeanRateLessThanEqualToExpectedMeanRate() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, MEAN_RATE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalSeventyFifthPercentileLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, SEVENTY_FIFTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalFiftiethPercentileLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, FIFTIETH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalNinetyFifthPercentileLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINETY_FIFTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalNinetyEighthPercentileLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINETY_EIGHTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalNinetyNinthPercentileLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINETY_NINTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalNinetyNinthPercentileLessThanEqualToExpectedNineHundred() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINE_HUNDRED_NINETY_NINTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalFifteenMinuteRateLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, FIFTEEN_MINUTE_RATE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalFiveMinuteRateLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, FIVE_MINUTE_RATE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveTotalOneMinuteRateLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, ONE_MINUTE_RATE),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveMaxTimeLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, MAX),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveMinLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, MIN),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveCountLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, COUNT),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 
     @Test
     public void shouldHaveStandardDeviationLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, STANDARD_DEVIATION),
-                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(COMMAND_EXPECTED_TIME_TAKEN))));
+                lessThanOrEqualTo(Double.parseDouble(externalProperties.value(QUERY_EXPECTED_TIME_TAKEN))));
     }
 }

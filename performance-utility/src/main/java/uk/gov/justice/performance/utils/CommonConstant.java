@@ -3,6 +3,7 @@ package uk.gov.justice.performance.utils;
 
 public class CommonConstant {
     public static final String ARTEMIS_JOLOKIA_URL_LIST = "artemis.jolokia.url.list";
+    public static final String WILDFLY_JOLOKIA_URL_LIST = "wildfly.jolokia.url.list";
     public static final String METRICS_NAME = "metrics.name";
     public static final String MEAN = "Mean";
     public static final String MEAN_RATE = "MeanRate";

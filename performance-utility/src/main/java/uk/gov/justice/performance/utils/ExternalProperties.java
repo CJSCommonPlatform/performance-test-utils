@@ -1,38 +1,16 @@
 package uk.gov.justice.performance.utils;
 
-import static org.junit.Assert.fail;
-import static uk.gov.justice.performance.utils.CommonConstant.COMMAND_EXPECTED_TIME_TAKEN;
-import static uk.gov.justice.performance.utils.CommonConstant.CONTEXT_NAMES;
-import static uk.gov.justice.performance.utils.CommonConstant.PROPERTY_FILE_NAME;
-import static uk.gov.justice.performance.utils.CommonConstant.QUERY_EXPECTED_TIME_TAKEN;
+import static uk.gov.justice.performance.utils.CommonConstant.DEFAULT_PROPERTIES_FILE;
+import static uk.gov.justice.performance.utils.CommonConstant.OVERRIDES_FILE_PROPERTY_NAME;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class ExternalProperties {
-    private static final Logger LOGGER = LoggerFactory.getLogger(ExternalProperties.class);
-
     private static ExternalProperties instance;
-    private final Properties properties = new Properties();
+    private final Properties properties;
 
     private ExternalProperties() {
-        InputStream is = getClass().getClassLoader().getResourceAsStream(PROPERTY_FILE_NAME);
-
-        if (is != null) {
-            try {
-                properties.load(is);
-                LOGGER.info("Contexts: {}, Command time expected: {}, Query time expected: {}", properties.getProperty(CONTEXT_NAMES),
-                        properties.getProperty(COMMAND_EXPECTED_TIME_TAKEN), properties.getProperty(QUERY_EXPECTED_TIME_TAKEN));
-            } catch (IOException e) {
-                fail("error reading " + PROPERTY_FILE_NAME);
-            }
-        } else {
-            fail(PROPERTY_FILE_NAME + " not found in the classpath");
-        }
+        properties = PropertiesFactory.safeLoadDefaultsAndOverrides(DEFAULT_PROPERTIES_FILE, System.getProperty(OVERRIDES_FILE_PROPERTY_NAME));
     }
 
     /**

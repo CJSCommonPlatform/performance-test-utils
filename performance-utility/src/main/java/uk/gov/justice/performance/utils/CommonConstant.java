@@ -22,7 +22,8 @@ public class CommonConstant {
     public static final String STANDARD_DEVIATION = "StdDev";
     public static final String PROXY_URL = "proxy.url";
     public static final String COMMA = ",";
-    public static final String PROPERTY_FILE_NAME = "application.properties";
+    public static final String DEFAULT_PROPERTIES_FILE = "application.properties";
+    public static final String OVERRIDES_FILE_PROPERTY_NAME = "overrides.file";
     public static final String CONTEXT_NAMES = "context.names";
     public static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
     public static final String QUERY_EXPECTED_TIME_TAKEN = "query.expected.time.taken";

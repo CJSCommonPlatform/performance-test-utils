@@ -11,19 +11,15 @@
 
     <artifactId>performance-utility</artifactId>
 
-    <profiles>
-        <profile>
-            <id>default</id>
-            <properties>
-                <artemisUrl></artemisUrl>
-                <wildflyUrl></wildflyUrl>
-                <proxyUrl></proxyUrl>
-                <contextList></contextList>
-                <queryTime></queryTime>
-                <commandTime></commandTime>
-            </properties>
-        </profile>
-    </profiles>
+    <properties>
+        <artemis.jolokia.url.list>http://localhost:8161/</artemis.jolokia.url.list>
+        <wildfly.jolokia.url.list>http://localhost:8080/jolokia/</wildfly.jolokia.url.list>
+        <proxy.url></proxy.url>
+        <context.names></context.names>
+        <query.expected.time.taken></query.expected.time.taken>
+        <command.expected.time.taken></command.expected.time.taken>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.jolokia</groupId>

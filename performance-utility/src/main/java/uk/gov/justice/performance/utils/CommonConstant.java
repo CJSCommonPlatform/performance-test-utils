@@ -18,7 +18,7 @@ public class CommonConstant {
     public static final String MIN = "Min";
     public static final String COUNT = "Count";
     public static final String STANDARD_DEVIATION = "StdDev";
-    public static final String DEV_PROXY_FULL_PATH = "dev.proxy.full.path";
+    public static final String PROXY_URL = "proxy.url";
     public static final String COMMA = ",";
     public static final String PROPERTY_FILE_NAME = "application.properties";
     public static final String CONTEXT_NAMES = "context.names";

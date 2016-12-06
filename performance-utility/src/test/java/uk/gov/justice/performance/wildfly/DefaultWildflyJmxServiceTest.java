@@ -44,41 +44,41 @@ public class DefaultWildflyJmxServiceTest {
     public void shouldReturnTimeTakenByCommandHandler() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(wildflyJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.timeTakenByCommandHandler("people", "Mean"), lessThanOrEqualTo(1.0));
+        assertThat(defaultWildflyJmxService.timeTakenByCommandHandler(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
     }
 
     @Test
     public void shouldReturnTimeTakenByEventListenerAndProcessor() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(wildflyJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.timeTakenByEventListener("people", "Mean"), lessThanOrEqualTo(1.0));
+        assertThat(defaultWildflyJmxService.timeTakenByEventListener(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
     }
 
     @Test
     public void shouldReturnTimeTakenByRestCommandApi() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(wildflyJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.timeTakenByRestCommandApi("people", "Mean"), lessThanOrEqualTo(1.0));
+        assertThat(defaultWildflyJmxService.timeTakenByRestCommandApi(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
     }
 
     @Test
     public void shouldReturnTimeTakenByRestQueryApi() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(wildflyJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.totalWildflyTimeForQueries("people", "Mean"), lessThanOrEqualTo(1.0));
+        assertThat(defaultWildflyJmxService.totalWildflyTimeForQueries(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
     }
 
     @Test
     public void shouldReturnTotalWildflyTimeForCommands() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(wildflyJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.totalWildflyTimeForCommands("people", "Mean"), lessThanOrEqualTo(4.0));
+        assertThat(defaultWildflyJmxService.totalWildflyTimeForCommands(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(4.0));
     }
 
     @Test
     public void shouldReturnTotalWildflyTimeForQueries() throws MalformedObjectNameException, J4pException {
         when(props.value(anyString())).thenReturn("abc");
         when(wildflyJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultWildflyJmxService.totalWildflyTimeForQueries("people", "Mean"), lessThanOrEqualTo(3.0));
+        assertThat(defaultWildflyJmxService.totalWildflyTimeForQueries(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(3.0));
     }
 }

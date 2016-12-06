@@ -1,6 +1,15 @@
 package uk.gov.justice.performance.utils;
 
 
+import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
+import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
+import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.management.MalformedObjectNameException;
+
 import org.jolokia.client.J4pClient;
 import org.jolokia.client.exception.J4pException;
 import org.jolokia.client.request.J4pReadRequest;
@@ -9,14 +18,6 @@ import org.jolokia.client.request.J4pSearchRequest;
 import org.jolokia.client.request.J4pSearchResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.management.MalformedObjectNameException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
-import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
-import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
 
 public class WildflyJolokiaClient {
     private static WildflyJolokiaClient instance;

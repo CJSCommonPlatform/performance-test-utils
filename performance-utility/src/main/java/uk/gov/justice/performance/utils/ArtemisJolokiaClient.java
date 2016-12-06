@@ -1,18 +1,18 @@
 package uk.gov.justice.performance.utils;
 
 
+import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
+import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
+import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jolokia.client.J4pClient;
 import org.jolokia.client.request.J4pReadRequest;
 import org.jolokia.client.request.J4pReadResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
-import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
-import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
 
 public class ArtemisJolokiaClient {
     private static ArtemisJolokiaClient instance;

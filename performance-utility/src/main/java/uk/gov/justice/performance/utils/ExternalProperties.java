@@ -1,18 +1,20 @@
 package uk.gov.justice.performance.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.junit.Assert.fail;
+import static uk.gov.justice.performance.utils.CommonConstant.COMMAND_EXPECTED_TIME_TAKEN;
+import static uk.gov.justice.performance.utils.CommonConstant.CONTEXT_NAMES;
+import static uk.gov.justice.performance.utils.CommonConstant.PROPERTY_FILE_NAME;
+import static uk.gov.justice.performance.utils.CommonConstant.QUERY_EXPECTED_TIME_TAKEN;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import static org.junit.Assert.fail;
-import static uk.gov.justice.performance.utils.CommonConstant.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ExternalProperties {
     private static final Logger LOGGER = LoggerFactory.getLogger(ExternalProperties.class);
-
 
     private static ExternalProperties instance;
     private final Properties properties = new Properties();
@@ -53,6 +55,10 @@ public class ExternalProperties {
      */
     public String value(String propertyName) {
         return properties.getProperty(propertyName);
+    }
+
+    public Properties getProperties() {
+        return properties;
     }
 
 }

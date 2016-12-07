@@ -1,4 +1,4 @@
-package uk.gov.justice.it;
+package uk.gov.justice.performance;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;

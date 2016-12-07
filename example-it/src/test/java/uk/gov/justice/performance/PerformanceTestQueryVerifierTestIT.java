@@ -1,14 +1,10 @@
 package uk.gov.justice.performance;
 
 
-import org.junit.Test;
-import uk.gov.justice.performance.utils.ExternalProperties;
-import uk.gov.justice.performance.wildfly.DefaultWildflyJmxService;
-import uk.gov.justice.performance.wildfly.WildflyJmxService;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
+import static uk.gov.justice.performance.utils.CommonConstant.CONTEXT_NAMES;
 import static uk.gov.justice.performance.utils.CommonConstant.COUNT;
 import static uk.gov.justice.performance.utils.CommonConstant.FIFTEEN_MINUTE_RATE;
 import static uk.gov.justice.performance.utils.CommonConstant.FIFTIETH_PERCENTILE;
@@ -22,18 +18,15 @@ import static uk.gov.justice.performance.utils.CommonConstant.NINETY_FIFTH_PERCE
 import static uk.gov.justice.performance.utils.CommonConstant.NINETY_NINTH_PERCENTILE;
 import static uk.gov.justice.performance.utils.CommonConstant.NINE_HUNDRED_NINETY_NINTH_PERCENTILE;
 import static uk.gov.justice.performance.utils.CommonConstant.ONE_MINUTE_RATE;
+import static uk.gov.justice.performance.utils.CommonConstant.QUERY_EXPECTED_TIME_TAKEN;
 import static uk.gov.justice.performance.utils.CommonConstant.SEVENTY_FIFTH_PERCENTILE;
 import static uk.gov.justice.performance.utils.CommonConstant.STANDARD_DEVIATION;
 
-import java.util.Properties;
+import org.junit.Test;
 
-public class PerformanceTestQueryVerifierTestIT {
+public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase {
 
-    private static final String QUERY_EXPECTED_TIME_TAKEN = "query.expected.time.taken";
-    private static final String CONTEXT_NAMES = "context.names";
-    public static final String PEOPLE_CONTEXT = "people";
-    private WildflyJmxService wildflyJmxService = new DefaultWildflyJmxService();
-    private Properties props = ExternalProperties.getInstance().getProperties();
+    private static final String PEOPLE_CONTEXT = "people";
 
     //test for multiple contexts
     @Test

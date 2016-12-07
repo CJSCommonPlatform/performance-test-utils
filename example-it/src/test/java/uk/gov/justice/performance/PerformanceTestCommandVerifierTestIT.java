@@ -4,24 +4,13 @@ package uk.gov.justice.performance;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
+import static uk.gov.justice.performance.utils.CommonConstant.COMMAND_EXPECTED_TIME_TAKEN;
+import static uk.gov.justice.performance.utils.CommonConstant.CONTEXT_NAMES;
 import static uk.gov.justice.performance.utils.CommonConstant.MEAN;
-
-import java.util.Properties;
 
 import org.junit.Test;
 
-import uk.gov.justice.performance.artemis.ArtemisJmxService;
-import uk.gov.justice.performance.artemis.DefaultArtemisJmxService;
-import uk.gov.justice.performance.utils.ExternalProperties;
-import uk.gov.justice.performance.wildfly.DefaultWildflyJmxService;
-import uk.gov.justice.performance.wildfly.WildflyJmxService;
-
-public class PerformanceTestCommandVerifierTestIT {
-    private static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
-    private static final String CONTEXT_NAMES = "context.names";
-    private ArtemisJmxService artemisJmxService = new DefaultArtemisJmxService();
-    private WildflyJmxService wildflyJmxService = new DefaultWildflyJmxService();
-    private Properties props = ExternalProperties.getInstance().getProperties();
+public class PerformanceTestCommandVerifierTestIT extends PerformanceVerifierBase {
 
     @Test
     public void shouldHaveTotalMeanTimeLessThanEqualToExpectedTime() throws Exception {

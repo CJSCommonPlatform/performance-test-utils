@@ -6,7 +6,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>performance-utility</module>
-        <module>example-it</module>
+        <module>performance-verifier</module>
     </modules>
     <parent>
         <groupId>uk.gov.justice</groupId>

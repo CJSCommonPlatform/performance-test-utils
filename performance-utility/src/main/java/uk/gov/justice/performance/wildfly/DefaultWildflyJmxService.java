@@ -2,8 +2,6 @@ package uk.gov.justice.performance.wildfly;
 
 
 import static uk.gov.justice.performance.utils.CommonConstant.METRICS_NAME;
-import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
-import static uk.gov.justice.performance.utils.CommonConstant.WILDFLY_JOLOKIA_URL_LIST;
 
 import java.util.Properties;
 
@@ -12,17 +10,11 @@ import javax.management.MalformedObjectNameException;
 import org.jolokia.client.exception.J4pException;
 
 import uk.gov.justice.performance.utils.CommonConstant;
-import uk.gov.justice.performance.utils.ExternalProperties;
 import uk.gov.justice.performance.utils.WildflyJolokiaClient;
 
 public class DefaultWildflyJmxService implements WildflyJmxService {
     private Properties props;
     private WildflyJolokiaClient wildflyJolokiaClient;
-
-    public DefaultWildflyJmxService() {
-        this.props = ExternalProperties.getInstance().getProperties();
-        this.wildflyJolokiaClient = new WildflyJolokiaClient(this.props.getProperty(WILDFLY_JOLOKIA_URL_LIST),this.props.getProperty(PROXY_URL));
-    }
 
     public DefaultWildflyJmxService(Properties props) {
         this.props = props;

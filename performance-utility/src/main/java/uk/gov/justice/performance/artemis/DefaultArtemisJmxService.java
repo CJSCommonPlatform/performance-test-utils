@@ -12,17 +12,11 @@ import javax.management.MalformedObjectNameException;
 import org.jolokia.client.exception.J4pException;
 
 import uk.gov.justice.performance.utils.ArtemisJolokiaClient;
-import uk.gov.justice.performance.utils.ExternalProperties;
 
 public class DefaultArtemisJmxService implements ArtemisJmxService {
 
     private Properties props;
     private ArtemisJolokiaClient artemisJolokiaClient;
-
-    public DefaultArtemisJmxService() {
-        this.props = ExternalProperties.getInstance().getProperties();
-        this.artemisJolokiaClient = new ArtemisJolokiaClient(this.props.getProperty(ARTEMIS_JOLOKIA_URL_LIST),this.props.getProperty(PROXY_URL));
-    }
 
     public DefaultArtemisJmxService(Properties props) {
         this.props = props;

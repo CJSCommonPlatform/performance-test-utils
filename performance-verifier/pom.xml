@@ -14,7 +14,14 @@
             <groupId>uk.gov.justice.performance</groupId>
             <artifactId>performance-utility</artifactId>
             <version>${project.version}</version>
-            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-junit</artifactId>
         </dependency>
     </dependencies>
 
@@ -23,13 +30,14 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.0.0</version>
                 <configuration>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>org.junit.runner.JUnitCore</mainClass>
+                            <mainClass>uk.gov.justice.performance.PerformanceVerifier</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

@@ -1,6 +1,14 @@
 package uk.gov.justice.performance.utils;
 
 
+import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
+import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.management.MalformedObjectNameException;
+
 import org.jolokia.client.J4pClient;
 import org.jolokia.client.exception.J4pException;
 import org.jolokia.client.request.J4pReadRequest;
@@ -10,32 +18,12 @@ import org.jolokia.client.request.J4pSearchResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.management.MalformedObjectNameException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
-import static uk.gov.justice.performance.utils.CommonConstant.DEV_PROXY_FULL_PATH;
-import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
-
 public class WildflyJolokiaClient {
-    private static WildflyJolokiaClient instance;
-    private static final Logger LOGGER = LoggerFactory.getLogger(WildflyJolokiaClient.class);
-    private static final String WILDFLY_JOLOKIA_FULL_PATH = "wildfly.jolokia.full.path";
-    private static ExternalProperties props = ExternalProperties.getInstance();
+    private Logger LOGGER = LoggerFactory.getLogger(WildflyJolokiaClient.class);
     private static List<J4pClient> j4pClients;
 
-    /**
-     * Singleton
-     *
-     * @return instance of the class
-     */
-    public static WildflyJolokiaClient getInstance() {
-        if (instance == null) {
-            initialiseClients();
-            instance = new WildflyJolokiaClient();
-        }
-        return instance;
+    public WildflyJolokiaClient(String clients, String proxy) {
+        initialiseClients(clients, proxy);
     }
 
     /**
@@ -70,10 +58,10 @@ public class WildflyJolokiaClient {
     /*
     *This method creates multiple clients for all the Artemis nodes.
     * */
-    private static void initialiseClients() {
+    private void initialiseClients(String clients, String proxy) {
         j4pClients = new ArrayList<J4pClient>();
-        for (String url : props.value(WILDFLY_JOLOKIA_FULL_PATH).split(COMMA)) {
-            j4pClients.add(J4pClient.url(url).proxy(props.value(DEV_PROXY_FULL_PATH)).build());
+        for (String url : clients.split(COMMA)) {
+            j4pClients.add(J4pClient.url(url).proxy(proxy).build());
         }
     }
 }

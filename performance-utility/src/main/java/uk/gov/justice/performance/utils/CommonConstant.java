@@ -2,6 +2,8 @@ package uk.gov.justice.performance.utils;
 
 
 public class CommonConstant {
+    public static final String ARTEMIS_JOLOKIA_URL_LIST = "artemis.jolokia.url.list";
+    public static final String WILDFLY_JOLOKIA_URL_LIST = "wildfly.jolokia.url.list";
     public static final String METRICS_NAME = "metrics.name";
     public static final String MEAN = "Mean";
     public static final String MEAN_RATE = "MeanRate";
@@ -18,9 +20,10 @@ public class CommonConstant {
     public static final String MIN = "Min";
     public static final String COUNT = "Count";
     public static final String STANDARD_DEVIATION = "StdDev";
-    public static final String DEV_PROXY_FULL_PATH = "dev.proxy.full.path";
+    public static final String PROXY_URL = "proxy.url";
     public static final String COMMA = ",";
-    public static final String PROPERTY_FILE_NAME = "application.properties";
+    public static final String DEFAULT_PROPERTIES_FILE = "application.properties";
+    public static final String OVERRIDES_FILE_PROPERTY_NAME = "overrides.file";
     public static final String CONTEXT_NAMES = "context.names";
     public static final String COMMAND_EXPECTED_TIME_TAKEN = "command.expected.time.taken";
     public static final String QUERY_EXPECTED_TIME_TAKEN = "query.expected.time.taken";

@@ -1,37 +1,30 @@
 package uk.gov.justice.performance.utils;
 
 
+import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
+import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import org.jolokia.client.J4pClient;
 import org.jolokia.client.request.J4pReadRequest;
 import org.jolokia.client.request.J4pReadResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
-import static uk.gov.justice.performance.utils.CommonConstant.DEV_PROXY_FULL_PATH;
-import static uk.gov.justice.performance.utils.CommonConstant.ZERO;
-
 public class ArtemisJolokiaClient {
-    private static ArtemisJolokiaClient instance;
-    private static final Logger LOGGER = LoggerFactory.getLogger(ArtemisJolokiaClient.class);
-    private static final String ARTEMIS_JOLOKIA_FULL_PATHS = "artemis.jolokia.full.path";
-    private static ExternalProperties props = ExternalProperties.getInstance();
-    private static List<J4pClient> j4pClients;
+    
+    private Logger LOGGER = LoggerFactory.getLogger(ArtemisJolokiaClient.class);
+    private List<J4pClient> j4pClients;
 
     /**
      * Singleton
      *
      * @return instance of the class
      */
-    public static ArtemisJolokiaClient getInstance() {
-        if (instance == null) {
-            initialiseClients();
-            instance = new ArtemisJolokiaClient();
-        }
-        return instance;
+    public ArtemisJolokiaClient(String clients, String proxy) {
+        initialiseClients(clients, proxy);
     }
 
     /**
@@ -58,10 +51,10 @@ public class ArtemisJolokiaClient {
     /*
     *This method creates multiple clients for all the Artemis nodes.
     * */
-    private static void initialiseClients() {
+    private void initialiseClients(String clients, String proxy) {
         j4pClients = new ArrayList<J4pClient>();
-        for (String url : props.value(ARTEMIS_JOLOKIA_FULL_PATHS).split(COMMA)) {
-            j4pClients.add(J4pClient.url(url).proxy(props.value(DEV_PROXY_FULL_PATH)).build());
+        for (String url : clients.split(COMMA)) {
+            j4pClients.add(J4pClient.url(url).proxy(proxy).build());
         }
     }
 }

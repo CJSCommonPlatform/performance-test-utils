@@ -18,11 +18,6 @@ public class ArtemisJolokiaClient {
     private Logger LOGGER = LoggerFactory.getLogger(ArtemisJolokiaClient.class);
     private List<J4pClient> j4pClients;
 
-    /**
-     * Singleton
-     *
-     * @return instance of the class
-     */
     public ArtemisJolokiaClient(String clients, String proxy) {
         initialiseClients(clients, proxy);
     }

@@ -12,16 +12,12 @@
     <artifactId>performance-utility</artifactId>
 
     <properties>
-        <artemis.jolokia.url.list>http://localhost:8161/jolokia</artemis.jolokia.url.list>
-        <wildfly.jolokia.url.list>http://localhost:8080/jolokia</wildfly.jolokia.url.list>
+        <artemis.jolokia.url.list>http://localhost:8161/</artemis.jolokia.url.list>
+        <wildfly.jolokia.url.list>http://localhost:8080/jolokia/</wildfly.jolokia.url.list>
         <proxy.url></proxy.url>
         <context.names></context.names>
         <query.expected.time.taken></query.expected.time.taken>
         <command.expected.time.taken></command.expected.time.taken>
-        <specific.command.name></specific.command.name>
-        <specific.command.related.events></specific.command.related.events>
-        <specific.command.expected.time.taken></specific.command.expected.time.taken>
-        <specific.command.rest.end.point></specific.command.rest.end.point>
     </properties>
 
     <dependencies>

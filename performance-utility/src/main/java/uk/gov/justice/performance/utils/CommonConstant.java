@@ -5,10 +5,6 @@ public class CommonConstant {
     public static final String ARTEMIS_JOLOKIA_URL_LIST = "artemis.jolokia.url.list";
     public static final String WILDFLY_JOLOKIA_URL_LIST = "wildfly.jolokia.url.list";
     public static final String METRICS_NAME = "metrics.name";
-    public static final String SPECIFIC_COMMAND_NAME = "specific.command.name";
-    public static final String SPECIFIC_COMMAND_EXPECTED_TIME_TAKEN = "specific.command.expected.time.taken";
-    public static final String SPECIFIC_COMMAND_REST_END_POINT = "specific.command.rest.end.point";
-    public static final String SPECIFIC_COMMAND_RELATED_EVENTS = "specific.command.related.events";
     public static final String MEAN = "Mean";
     public static final String MEAN_RATE = "MeanRate";
     public static final String FIFTIETH_PERCENTILE = "50thPercentile";

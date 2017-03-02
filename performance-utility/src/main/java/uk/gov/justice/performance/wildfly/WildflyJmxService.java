@@ -18,7 +18,4 @@ public interface WildflyJmxService {
     double totalWildflyTimeForQueries(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
 
     double totalWildflyTimeForCommands(String contextName, String timeType) throws J4pException, MalformedObjectNameException;
-
-    double totalWildflyTimeForSpecificCommand(String contextName, String commandName, String restEndPoint, String timeType)
-            throws J4pException, MalformedObjectNameException;
 }

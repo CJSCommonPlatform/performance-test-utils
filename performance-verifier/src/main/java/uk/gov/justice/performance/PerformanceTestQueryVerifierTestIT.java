@@ -110,12 +110,6 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
     }
 
     @Test
-    public void shouldHaveCountLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, COUNT),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
-    }
-
-    @Test
     public void shouldHaveStandardDeviationLessThanEqualToExpected() throws Exception {
         assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, STANDARD_DEVIATION),
                 lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));

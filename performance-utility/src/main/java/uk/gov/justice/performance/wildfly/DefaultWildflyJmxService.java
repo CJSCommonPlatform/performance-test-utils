@@ -1,24 +1,25 @@
 package uk.gov.justice.performance.wildfly;
 
 
-import static uk.gov.justice.performance.utils.CommonConstant.METRICS_NAME;
-
-import java.util.Properties;
-
-import javax.management.MalformedObjectNameException;
-
 import org.jolokia.client.exception.J4pException;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.gov.justice.performance.utils.CommonConstant;
 import uk.gov.justice.performance.utils.WildflyJolokiaClient;
 
+import javax.management.MalformedObjectNameException;
+import java.util.Properties;
+
+import static uk.gov.justice.performance.utils.CommonConstant.METRICS_NAME;
+
 public class DefaultWildflyJmxService implements WildflyJmxService {
+    private Logger LOGGER = LoggerFactory.getLogger(DefaultWildflyJmxService.class);
     private Properties props;
     private WildflyJolokiaClient wildflyJolokiaClient;
 
     public DefaultWildflyJmxService(Properties props) {
         this.props = props;
-        this.wildflyJolokiaClient = new WildflyJolokiaClient(this.props.getProperty(CommonConstant.WILDFLY_JOLOKIA_URL_LIST),this.props.getProperty(CommonConstant.PROXY_URL));
+        this.wildflyJolokiaClient = new WildflyJolokiaClient(this.props.getProperty(CommonConstant.WILDFLY_JOLOKIA_URL_LIST), this.props.getProperty(CommonConstant.PROXY_URL));
     }
 
     public DefaultWildflyJmxService(Properties props, WildflyJolokiaClient wildflyJolokiaClient) {
@@ -42,7 +43,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(".controller.command-")
                 .append(contextName)
                 .append("*").toString();
-
+        LOGGER.info(timeType + " : " + searchStr);
         return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
@@ -54,6 +55,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(".handler.command-")
                 .append(contextName)
                 .append("*").toString();
+        LOGGER.info(timeType + " : " + searchStr);
         return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
@@ -65,6 +67,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(".event-")
                 .append(contextName)
                 .append("*").toString();
+        LOGGER.info(timeType + " : " + searchStr);
         return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
@@ -77,6 +80,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(contextName)
                 .append("/")
                 .append("*").toString();
+        LOGGER.info(timeType + " : " + searchStr);
         return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 
@@ -89,6 +93,7 @@ public class DefaultWildflyJmxService implements WildflyJmxService {
                 .append(contextName)
                 .append("/")
                 .append("*").toString();
+        LOGGER.info(timeType + " : " + searchStr);
         return wildflyJolokiaClient.getJmxAttributeValue(searchStr, timeType);
     }
 

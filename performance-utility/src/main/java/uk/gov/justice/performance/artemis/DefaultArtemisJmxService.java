@@ -11,24 +11,26 @@ import javax.management.MalformedObjectNameException;
 
 import org.jolokia.client.exception.J4pException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import uk.gov.justice.performance.utils.ArtemisJolokiaClient;
 
 public class DefaultArtemisJmxService implements ArtemisJmxService {
-
+    private Logger LOGGER = LoggerFactory.getLogger(DefaultArtemisJmxService.class);
     private Properties props;
     private ArtemisJolokiaClient artemisJolokiaClient;
 
     public DefaultArtemisJmxService(Properties props) {
         this.props = props;
-        this.artemisJolokiaClient = new ArtemisJolokiaClient(this.props.getProperty(ARTEMIS_JOLOKIA_URL_LIST),this.props.getProperty(PROXY_URL));
+        this.artemisJolokiaClient = new ArtemisJolokiaClient(this.props.getProperty(ARTEMIS_JOLOKIA_URL_LIST), this.props.getProperty(PROXY_URL));
     }
-    
+
     public DefaultArtemisJmxService(Properties props, ArtemisJolokiaClient artemisJolokiaClient) {
         this.props = props;
         this.artemisJolokiaClient = artemisJolokiaClient;
     }
 
-    public void setProps( Properties props ) {
+    public void setProps(Properties props) {
         this.props = props;
     }
 
@@ -42,6 +44,7 @@ public class DefaultArtemisJmxService implements ArtemisJmxService {
                 .append(":name=jms.queue.")
                 .append(contextName)
                 .append(".controller.command").toString();
+        LOGGER.info(timeType + " : " + mBeanName);
         return artemisJolokiaClient.getJmxAttributeValue(mBeanName, timeType);
     }
 
@@ -51,6 +54,7 @@ public class DefaultArtemisJmxService implements ArtemisJmxService {
                 .append(":name=jms.queue.")
                 .append(contextName)
                 .append(".handler.command").toString();
+        LOGGER.info(timeType + " : " + mBeanName);
         return artemisJolokiaClient.getJmxAttributeValue(mBeanName, timeType);
     }
 
@@ -64,6 +68,7 @@ public class DefaultArtemisJmxService implements ArtemisJmxService {
                 .append("\\.event\\.listener\\.")
                 .append(contextName)
                 .append("\\.event").toString();
+        LOGGER.info(timeType + " : " + mBeanName);
         return artemisJolokiaClient.getJmxAttributeValue(mBeanName, timeType);
     }
 

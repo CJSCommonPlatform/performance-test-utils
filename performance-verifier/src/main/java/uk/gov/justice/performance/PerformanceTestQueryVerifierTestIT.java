@@ -1,11 +1,14 @@
 package uk.gov.justice.performance;
 
 
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static uk.gov.justice.performance.utils.CommonConstant.COMMA;
 import static uk.gov.justice.performance.utils.CommonConstant.CONTEXT_NAMES;
-import static uk.gov.justice.performance.utils.CommonConstant.COUNT;
 import static uk.gov.justice.performance.utils.CommonConstant.FIFTEEN_MINUTE_RATE;
 import static uk.gov.justice.performance.utils.CommonConstant.FIFTIETH_PERCENTILE;
 import static uk.gov.justice.performance.utils.CommonConstant.FIVE_MINUTE_RATE;
@@ -22,96 +25,147 @@ import static uk.gov.justice.performance.utils.CommonConstant.QUERY_EXPECTED_TIM
 import static uk.gov.justice.performance.utils.CommonConstant.SEVENTY_FIFTH_PERCENTILE;
 import static uk.gov.justice.performance.utils.CommonConstant.STANDARD_DEVIATION;
 
-import org.junit.Test;
-
 public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase {
+    private Logger LOGGER = LoggerFactory.getLogger(PerformanceTestQueryVerifierTestIT.class);
+    String[] names = props.getProperty(CONTEXT_NAMES).split(COMMA);
 
-    private static final String PEOPLE_CONTEXT = "people";
-
-    //test for multiple contexts
     @Test
     public void shouldHaveTotalMeanTimeLessThanEqualToExpectedMeanTime() throws Exception {
-        String[] names = props.getProperty(CONTEXT_NAMES).split(COMMA);
-        for (String contextName : names)
-            assertThat(wildflyJmxService.totalWildflyTimeForQueries(contextName, MEAN),
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MEAN);
+            LOGGER.info("mbean name for queries || " + MEAN + " || " + result.getName());
+            assertThat(result.getTime(),
                     lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalMeanRateLessThanEqualToExpectedMeanRate() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, MEAN_RATE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MEAN_RATE);
+            LOGGER.info("mbean name for queries || " + MEAN_RATE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalSeventyFifthPercentileLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, SEVENTY_FIFTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, SEVENTY_FIFTH_PERCENTILE);
+            LOGGER.info("mbean name for queries || " + SEVENTY_FIFTH_PERCENTILE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalFiftiethPercentileLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, FIFTIETH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, FIFTIETH_PERCENTILE);
+            LOGGER.info("mbean name for queries || " + FIFTIETH_PERCENTILE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalNinetyFifthPercentileLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINETY_FIFTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINETY_FIFTH_PERCENTILE);
+            LOGGER.info("mbean name for queries || " + NINETY_FIFTH_PERCENTILE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalNinetyEighthPercentileLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINETY_EIGHTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINETY_EIGHTH_PERCENTILE);
+            LOGGER.info("mbean name for queries || " + NINETY_EIGHTH_PERCENTILE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalNinetyNinthPercentileLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINETY_NINTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINETY_NINTH_PERCENTILE);
+            LOGGER.info("mbean name for queries || " + NINETY_NINTH_PERCENTILE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalNinetyNinthPercentileLessThanEqualToExpectedNineHundred() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, NINE_HUNDRED_NINETY_NINTH_PERCENTILE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINE_HUNDRED_NINETY_NINTH_PERCENTILE);
+            LOGGER.info("mbean name for queries || " + NINE_HUNDRED_NINETY_NINTH_PERCENTILE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalFifteenMinuteRateLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, FIFTEEN_MINUTE_RATE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, FIFTEEN_MINUTE_RATE);
+            LOGGER.info("mbean name for queries || " + FIFTEEN_MINUTE_RATE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalFiveMinuteRateLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, FIVE_MINUTE_RATE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, FIVE_MINUTE_RATE);
+            LOGGER.info("mbean name for queries || " + FIVE_MINUTE_RATE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveTotalOneMinuteRateLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, ONE_MINUTE_RATE),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, ONE_MINUTE_RATE);
+            LOGGER.info("mbean name for queries || " + ONE_MINUTE_RATE + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveMaxTimeLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, MAX),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MAX);
+            LOGGER.info("mbean name for queries || " + MAX + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveMinLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, MIN),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MIN);
+            LOGGER.info("mbean name for queries || " + MIN + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 
     @Test
     public void shouldHaveStandardDeviationLessThanEqualToExpected() throws Exception {
-        assertThat(wildflyJmxService.totalWildflyTimeForQueries(PEOPLE_CONTEXT, STANDARD_DEVIATION),
-                lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        for (String contextName : names) {
+            MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, STANDARD_DEVIATION);
+            LOGGER.info("mbean name for queries || " + STANDARD_DEVIATION + " || " + result.getName());
+            assertThat(result.getTime(),
+                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+        }
     }
 }

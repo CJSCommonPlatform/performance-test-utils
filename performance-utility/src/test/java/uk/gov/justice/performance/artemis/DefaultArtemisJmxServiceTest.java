@@ -2,6 +2,7 @@ package uk.gov.justice.performance.artemis;
 
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.lessThanOrEqualTo;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
@@ -17,6 +18,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import uk.gov.justice.performance.MBean;
 import uk.gov.justice.performance.utils.ArtemisJolokiaClient;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -34,30 +38,11 @@ public class DefaultArtemisJmxServiceTest {
     private ArtemisJolokiaClient artemisJolokiaClient;
 
     @Test
-    public void shouldReturnTimeMessageStaysInCommandQueue() throws MalformedObjectNameException, J4pException {
-        when(props.getProperty(anyString())).thenReturn("abc");
-        when(artemisJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultArtemisJmxService.timeMessageStaysInCommandQueue(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
-    }
-
-    @Test
-    public void shouldReturnTimeMessageStaysInHandlerQueue() throws MalformedObjectNameException, J4pException {
-        when(props.getProperty(anyString())).thenReturn("abc");
-        when(artemisJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultArtemisJmxService.timeMessageStaysInHandlerQueue(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
-    }
-
-    @Test
-    public void shouldReturnTimeMessageStaysInEventListenerTopic() throws MalformedObjectNameException, J4pException {
-        when(props.getProperty(anyString())).thenReturn("abc");
-        when(artemisJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultArtemisJmxService.timeMessageStaysInEventListenerTopic(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(1.0));
-    }
-
-    @Test
     public void shouldReturnTotalTimeMessageStaysInQueuesAndTopic() throws MalformedObjectNameException, J4pException {
         when(props.getProperty(anyString())).thenReturn("abc");
         when(artemisJolokiaClient.getJmxAttributeValue(anyString(), anyString())).thenReturn(1.0);
-        assertThat(defaultArtemisJmxService.totalTimeMessageStaysInQueuesAndTopic(CONTEXT_NAME, JMX_ATTRIBUTE_NAME), lessThanOrEqualTo(3.0));
+        MBean mbean = defaultArtemisJmxService.totalTimeMessageStaysInQueuesAndTopic(CONTEXT_NAME, JMX_ATTRIBUTE_NAME);
+        assertThat(mbean.getTime(), lessThanOrEqualTo(3.0));
+
     }
 }

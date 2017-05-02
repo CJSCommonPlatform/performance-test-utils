@@ -1,22 +1,18 @@
 package uk.gov.justice.performance.artemis;
 
 
+import org.jolokia.client.exception.J4pException;
+import uk.gov.justice.performance.MBean;
+import uk.gov.justice.performance.utils.ArtemisJolokiaClient;
+
+import javax.management.MalformedObjectNameException;
+import java.util.Properties;
+
 import static uk.gov.justice.performance.utils.CommonConstant.ARTEMIS_JOLOKIA_URL_LIST;
 import static uk.gov.justice.performance.utils.CommonConstant.METRICS_NAME;
 import static uk.gov.justice.performance.utils.CommonConstant.PROXY_URL;
 
-import java.util.Properties;
-
-import javax.management.MalformedObjectNameException;
-
-import org.jolokia.client.exception.J4pException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import uk.gov.justice.performance.utils.ArtemisJolokiaClient;
-
 public class DefaultArtemisJmxService implements ArtemisJmxService {
-    private Logger LOGGER = LoggerFactory.getLogger(DefaultArtemisJmxService.class);
     private Properties props;
     private ArtemisJolokiaClient artemisJolokiaClient;
 
@@ -30,35 +26,27 @@ public class DefaultArtemisJmxService implements ArtemisJmxService {
         this.artemisJolokiaClient = artemisJolokiaClient;
     }
 
-    public void setProps(Properties props) {
-        this.props = props;
-    }
-
-    public void setArtemisJolokiaClient(ArtemisJolokiaClient artemisJolokiaClient) {
-        this.artemisJolokiaClient = artemisJolokiaClient;
-    }
-
-    public double timeMessageStaysInCommandQueue(String contextName, String timeType)
+    private double timeMessageStaysInCommandQueue(MBean mBean, String contextName, String timeType)
             throws J4pException, MalformedObjectNameException {
         String mBeanName = new StringBuilder().append(props.getProperty(METRICS_NAME))
                 .append(":name=jms.queue.")
                 .append(contextName)
                 .append(".controller.command").toString();
-        LOGGER.info(timeType + " : " + mBeanName);
+        mBean.setName(mBeanName);
         return artemisJolokiaClient.getJmxAttributeValue(mBeanName, timeType);
     }
 
-    public double timeMessageStaysInHandlerQueue(String contextName, String timeType)
+    private double timeMessageStaysInHandlerQueue(MBean mBean, String contextName, String timeType)
             throws J4pException, MalformedObjectNameException {
         String mBeanName = new StringBuilder().append(props.getProperty(METRICS_NAME))
                 .append(":name=jms.queue.")
                 .append(contextName)
                 .append(".handler.command").toString();
-        LOGGER.info(timeType + " : " + mBeanName);
+        mBean.setName(mBean.getName() + " || " + mBeanName);
         return artemisJolokiaClient.getJmxAttributeValue(mBeanName, timeType);
     }
 
-    public double timeMessageStaysInEventListenerTopic(String contextName, String timeType)
+    private double timeMessageStaysInEventListenerTopic(MBean mBean, String contextName, String timeType)
             throws J4pException, MalformedObjectNameException {
         String mBeanName = new StringBuilder().append(props.getProperty(METRICS_NAME))
                 .append(":name=jms.topic.")
@@ -68,13 +56,25 @@ public class DefaultArtemisJmxService implements ArtemisJmxService {
                 .append("\\.event\\.listener\\.")
                 .append(contextName)
                 .append("\\.event").toString();
-        LOGGER.info(timeType + " : " + mBeanName);
+        mBean.setName(mBean.getName() + " || " + mBeanName);
         return artemisJolokiaClient.getJmxAttributeValue(mBeanName, timeType);
     }
 
-    public double totalTimeMessageStaysInQueuesAndTopic(String contextName, String timeType) throws J4pException, MalformedObjectNameException {
-        return timeMessageStaysInCommandQueue(contextName, timeType)
-                + timeMessageStaysInHandlerQueue(contextName, timeType)
-                + timeMessageStaysInEventListenerTopic(contextName, timeType);
+    public MBean totalTimeMessageStaysInQueuesAndTopic(String contextName, String timeType) throws J4pException, MalformedObjectNameException {
+        MBean mbean = new MBean();
+
+        double time = timeMessageStaysInCommandQueue(mbean, contextName, timeType)
+                + timeMessageStaysInHandlerQueue(mbean, contextName, timeType)
+                + timeMessageStaysInEventListenerTopic(mbean, contextName, timeType);
+        mbean.setTime(time);
+        return mbean;
+    }
+
+    public void setArtemisJolokiaClient(ArtemisJolokiaClient artemisJolokiaClient) {
+        this.artemisJolokiaClient = artemisJolokiaClient;
+    }
+
+    public void setProps(Properties props) {
+        this.props = props;
     }
 }

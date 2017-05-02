@@ -12,7 +12,7 @@
     <artifactId>performance-utility</artifactId>
 
     <properties>
-        <artemis.jolokia.url.list>http://localhost:8161/</artemis.jolokia.url.list>
+        <artemis.jolokia.url.list>http://localhost:8161/jolokia</artemis.jolokia.url.list>
         <wildfly.jolokia.url.list>http://localhost:8080/jolokia/</wildfly.jolokia.url.list>
         <proxy.url></proxy.url>
         <context.names></context.names>

@@ -34,8 +34,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MEAN);
             LOGGER.info("mbean name for queries || " + MEAN + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -44,8 +43,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MEAN_RATE);
             LOGGER.info("mbean name for queries || " + MEAN_RATE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -54,8 +52,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, SEVENTY_FIFTH_PERCENTILE);
             LOGGER.info("mbean name for queries || " + SEVENTY_FIFTH_PERCENTILE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -64,8 +61,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, FIFTIETH_PERCENTILE);
             LOGGER.info("mbean name for queries || " + FIFTIETH_PERCENTILE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -74,8 +70,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINETY_FIFTH_PERCENTILE);
             LOGGER.info("mbean name for queries || " + NINETY_FIFTH_PERCENTILE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -84,8 +79,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINETY_EIGHTH_PERCENTILE);
             LOGGER.info("mbean name for queries || " + NINETY_EIGHTH_PERCENTILE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -94,8 +88,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINETY_NINTH_PERCENTILE);
             LOGGER.info("mbean name for queries || " + NINETY_NINTH_PERCENTILE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -104,8 +97,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, NINE_HUNDRED_NINETY_NINTH_PERCENTILE);
             LOGGER.info("mbean name for queries || " + NINE_HUNDRED_NINETY_NINTH_PERCENTILE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -114,8 +106,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, FIFTEEN_MINUTE_RATE);
             LOGGER.info("mbean name for queries || " + FIFTEEN_MINUTE_RATE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -124,8 +115,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, FIVE_MINUTE_RATE);
             LOGGER.info("mbean name for queries || " + FIVE_MINUTE_RATE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -134,8 +124,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, ONE_MINUTE_RATE);
             LOGGER.info("mbean name for queries || " + ONE_MINUTE_RATE + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -144,8 +133,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MAX);
             LOGGER.info("mbean name for queries || " + MAX + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -154,8 +142,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, MIN);
             LOGGER.info("mbean name for queries || " + MIN + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
     }
 
@@ -164,8 +151,14 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         for (String contextName : names) {
             MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, STANDARD_DEVIATION);
             LOGGER.info("mbean name for queries || " + STANDARD_DEVIATION + " || " + result.getName());
-            assertThat(result.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN))));
+            assertQueryLatencyNotBreached(result);
         }
+    }
+
+    private void assertQueryLatencyNotBreached(MBean result) {
+        String message = String.format("Query latency breached: $%s", result.getName());
+        double actual = result.getTime();
+        double threshold = Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN));
+        assertThat(message, actual, lessThanOrEqualTo(threshold));
     }
 }

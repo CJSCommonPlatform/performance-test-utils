@@ -56,13 +56,11 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
     public void metricShouldBelowBreachingThreshold() throws Exception {
         MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, property);
         LOGGER.info("mbean name for queries || " + property + " || " + result.getName());
-        assertQueryLatencyNotBreached(result);
-    }
 
-    private void assertQueryLatencyNotBreached(MBean result) {
-        String message = String.format("Query latency breached: $%s", result.getName());
+        String message = String.format("Query metric breached: $%s", result.getName());
         double actual = result.getTime();
         double threshold = Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN));
         assertThat(message, actual, lessThanOrEqualTo(threshold));
     }
+
 }

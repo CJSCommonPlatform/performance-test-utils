@@ -57,7 +57,7 @@ public class PerformanceTestQueryVerifierTestIT extends PerformanceVerifierBase 
         MBean result = wildflyJmxService.totalWildflyTimeForQueries(contextName, property);
         LOGGER.info("mbean name for queries || " + property + " || " + result.getName());
 
-        String message = String.format("Query metric breached: $%s", result.getName());
+        String message = String.format("Query metric breached threshold: %s - %s", result.getName(), property);
         double actual = result.getTime();
         double threshold = Double.parseDouble(props.getProperty(QUERY_EXPECTED_TIME_TAKEN));
         assertThat(message, actual, lessThanOrEqualTo(threshold));

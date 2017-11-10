@@ -40,7 +40,7 @@ public class PerformanceTestCommandVerifierTestIT extends PerformanceVerifierBas
         double threshold = Double.parseDouble(props.getProperty(COMMAND_EXPECTED_TIME_TAKEN));
 
         String message = String.format(
-                "Command threshold breached: $1%s, $2%s",
+                "Command threshold breached: %s, %s",
                 timeInQueues.getName(),
                 timeForWildfly.getName());
         assertThat(message, actual, lessThanOrEqualTo(threshold));

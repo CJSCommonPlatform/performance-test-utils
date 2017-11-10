@@ -46,7 +46,10 @@ public class WildflyJolokiaClient {
             try {
                 J4pReadRequest req = new J4pReadRequest(name);
                 J4pReadResponse resp = j4pClient.execute(req);
-                totalTime = totalTime + (Double) resp.getValue(timeType);
+                double result = resp.getValue(timeType);
+
+                LOGGER.info("{}: {} of {} from {}", result, timeType, name, j4pClient.getUri());
+                totalTime = totalTime + result;
             } catch (Exception ex) {
                 LOGGER.error("mBean not found {}, {}", name, ex);
                 return ZERO;

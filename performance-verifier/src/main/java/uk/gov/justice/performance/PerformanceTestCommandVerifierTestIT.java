@@ -2,6 +2,10 @@ package uk.gov.justice.performance;
 
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
+import org.junit.runners.Parameterized.Parameters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,23 +16,33 @@ import static uk.gov.justice.performance.utils.CommonConstant.COMMAND_EXPECTED_T
 import static uk.gov.justice.performance.utils.CommonConstant.CONTEXT_NAMES;
 import static uk.gov.justice.performance.utils.CommonConstant.MEAN;
 
+@RunWith(Parameterized.class)
 public class PerformanceTestCommandVerifierTestIT extends PerformanceVerifierBase {
     private Logger LOGGER = LoggerFactory.getLogger(PerformanceTestCommandVerifierTestIT.class);
 
+    @Parameters(name = "context: {0}")
+    public static String[] contextNames() {
+        return props.getProperty(CONTEXT_NAMES).split(COMMA);
+    }
+
+    @Parameter
+    public String contextName;
+
     @Test
     public void shouldHaveTotalMeanTimeLessThanEqualToExpectedTime() throws Exception {
-        String[] names = props.getProperty(CONTEXT_NAMES).split(COMMA);
+        MBean timeInQueues = artemisJmxService.totalTimeMessageStaysInQueuesAndTopic(contextName, MEAN);
+        MBean timeForWildfly = wildflyJmxService.totalWildflyTimeForCommands(contextName, MEAN);
 
-        for (String contextName : names) {
+        LOGGER.info("name for QueuesAndTopic : MEAN " + timeInQueues.getName());
+        LOGGER.info("name for Commands : " + timeForWildfly.getName());
 
-            MBean timeInQueues = artemisJmxService.totalTimeMessageStaysInQueuesAndTopic(contextName, MEAN);
-            MBean timeForWildfly = wildflyJmxService.totalWildflyTimeForCommands(contextName, MEAN);
+        double actual = timeInQueues.getTime() + timeForWildfly.getTime();
+        double threshold = Double.parseDouble(props.getProperty(COMMAND_EXPECTED_TIME_TAKEN));
 
-            LOGGER.info("name for QueuesAndTopic : MEAN " + timeInQueues.getName());
-            LOGGER.info("name for Commands : " + timeForWildfly.getName());
-
-            assertThat(timeInQueues.getTime() + timeForWildfly.getTime(),
-                    lessThanOrEqualTo(Double.parseDouble(props.getProperty(COMMAND_EXPECTED_TIME_TAKEN))));
-        }
+        String message = String.format(
+                "Command threshold breached: %s, %s",
+                timeInQueues.getName(),
+                timeForWildfly.getName());
+        assertThat(message, actual, lessThanOrEqualTo(threshold));
     }
 }

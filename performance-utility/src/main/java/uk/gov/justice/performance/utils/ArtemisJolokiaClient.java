@@ -26,21 +26,24 @@ public class ArtemisJolokiaClient {
      * This method returns the average time of all the nodes.
      */
     public double getJmxAttributeValue(String mBeanName, String timeType) {
-        double result = ZERO;
+        double sum = ZERO;
         for (J4pClient j4pClient : j4pClients) {
             try {
                 J4pReadRequest req = new J4pReadRequest(mBeanName);
                 J4pReadResponse resp = j4pClient.execute(req);
-                result = result + ((Number) resp.getValue(timeType)).doubleValue();
+                double result = ((Number) resp.getValue(timeType)).doubleValue();
+
+                LOGGER.info("{}: {} from {}", result, timeType, j4pClient.getUri());
+                sum = sum + result;
             } catch (Exception ex) {
                 LOGGER.error("mBean not found {}, {}", mBeanName, ex);
             }
         }
 
-        if (result == ZERO) {
-            return result;
+        if (sum == ZERO) {
+            return sum;
         }
-        return result / j4pClients.size();
+        return sum / j4pClients.size();
     }
 
     /*

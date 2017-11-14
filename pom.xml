@@ -15,7 +15,7 @@
     </parent>
     <groupId>uk.gov.justice.performance</groupId>
     <artifactId>performance-test-utils</artifactId>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.6.0</version>
     <properties>
         <common-bom.version>1.22.0</common-bom.version>
     </properties>

@@ -11,13 +11,14 @@
     <parent>
         <groupId>uk.gov.justice</groupId>
         <artifactId>maven-parent-pom</artifactId>
-        <version>1.6.0</version>
+        <version>1.7.1</version>
     </parent>
     <groupId>uk.gov.justice.performance</groupId>
     <artifactId>performance-test-utils</artifactId>
-    <version>1.6.0-SNAPSHOT</version>
+    <version>1.7.0-SNAPSHOT</version>
     <properties>
-        <common-bom.version>1.22.0</common-bom.version>
+        <cpp.repo.name>performance-test-utils</cpp.repo.name>
+        <common-bom.version>1.28.0</common-bom.version>
     </properties>
     <dependencyManagement>
         <dependencies>
